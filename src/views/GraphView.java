@@ -1,5 +1,8 @@
 package src.views;
 
+import java.text.DecimalFormat;
+
+import javafx.geometry.Point2D;
 import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
@@ -29,11 +32,23 @@ public class GraphView {
         chart.setLegendVisible(false);
         final XYChart.Series<Number, Number> dataSeries = new XYChart.Series<>();
 
-        for (int i = 0; i < model.getIdList().size(); i++) {
-            if (model.getHitList().get(i)) {
-                dataSeries.getData().add(new XYChart.Data<>(model.getIdList().get(i), model.getTimeList().get(i)));
-            }
-        }
+        Point2D a = new Point2D(model.getIdList().get(0), model.getTimeList().get(0));
+        Point2D b = new Point2D(model.getIdList().get(model.getIdList().size() - 1),
+                model.getTimeList().get(model.getTimeList().size() - 1));
+
+        dataSeries.getData().add(new XYChart.Data<>(model.getIdList().get(0), model.getTimeList().get(0)));
+        dataSeries.getData().add(new XYChart.Data<>(model.getIdList().get(model.getIdList().size() - 1),
+                model.getTimeList().get(model.getTimeList().size() - 1)));
+
+        chart.setTitle("Line of Regression: " + new DecimalFormat("#.##").format(a.magnitude()) + " + "
+                + new DecimalFormat("#.##").format(b.magnitude()) + " * ID");
+
+        // for (int i = 0; i < model.getIdList().size(); i++) {
+        // if (model.getHitList().get(i)) {
+        // dataSeries.getData().add(new XYChart.Data<>(model.getIdList().get(i),
+        // model.getTimeList().get(i)));
+        // }
+        // }
 
         chart.getData().add(dataSeries);
 

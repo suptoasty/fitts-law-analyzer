@@ -29,7 +29,7 @@ public class HelpView {
         flowpane.getChildren().add(info);
 
         info.setText("The purpose of this application is to empirically validate the premise of Fitts Law\n"
-                + "Click the center of the square to play.\n");
+                + "Click the center of the square to play.\n" + "Go to View/Graph to see results.\n");
 
         dialog.setScene(dialogScene);
         dialog.show();
